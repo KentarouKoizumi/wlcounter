@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import {Stack, Button, Typography} from '@mui/material'
 import './App.css';
@@ -15,10 +14,6 @@ const theme = createTheme({
 
 function App() {
   const [cookies, setCookie] = useCookies();
-  const [all, setAll] = useState<number[]>([0, 0]);
-  const [thisSplit, setThisSplit] = useState<number[]>([0, 0]);
-
-
 
   const handleWon = () => {
     setCookie("count", cookies.count + "w");
@@ -35,6 +30,7 @@ function App() {
   }
   return (
     <>
+    {cookies.count === undefined ? setCookie("count", "") : null}
     <ThemeProvider theme={theme}>
       <Box sx={{
         display: "flex",
@@ -45,22 +41,22 @@ function App() {
       }}>
         <Stack spacing={2} direction="column">
           <Typography>
-            すべてのゲーム数： {cookies.count.match(/w|l/g)?.length || 0}
+            すべてのゲーム数： {cookies.count?.match(/w|l/g)?.length || 0}
           </Typography>
         <Typography>
-          {cookies.count.match(/w/g)?.length || 0}W-{cookies.count.match(/l/g)?.length || 0}L
+          {cookies.count?.match(/w/g)?.length || 0}W-{cookies.count?.match(/l/g)?.length || 0}L
         </Typography>
         <Typography>
-          勝率： {Math.round((cookies.count.match(/w/g)?.length || 0) / (cookies.count.match(/w|l/g)?.length || 1) * 1000) / 10}%
+          勝率： {Math.round((cookies.count?.match(/w/g)?.length || 0) / (cookies.count?.match(/w|l/g)?.length || 1) * 1000) / 10}%
         </Typography>
           <Typography>
-            今スプリットのゲーム数： {cookies.count.split("s").reverse()[0].match(/w|l/g)?.length || 0}
+            今スプリットのゲーム数： {cookies.count?.split("s").reverse()[0].match(/w|l/g)?.length || 0}
           </Typography>
         <Typography>
-          {cookies.count.split("s").reverse()[0].match(/w/g)?.length || 0}W-{cookies.count.split("s").reverse()[0].match(/l/g)?.length || 0}L
+          {cookies.count?.split("s").reverse()[0].match(/w/g)?.length || 0}W-{cookies.count?.split("s").reverse()[0].match(/l/g)?.length || 0}L
         </Typography>
         <Typography>
-          勝率： {Math.round((cookies.count.match(/w/g)?.length || 0) / (cookies.count.match(/w|l/g)?.length || 1) * 1000) / 10}%
+          勝率： {Math.round((cookies.count?.match(/w/g)?.length || 0) / (cookies.count?.match(/w|l/g)?.length || 1) * 1000) / 10}%
         </Typography>
           <Stack spacing={10} direction="row">
             <Button variant="contained" color="success" onClick={handleWon}>
