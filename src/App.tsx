@@ -16,17 +16,24 @@ function App() {
   const [cookies, setCookie] = useCookies();
 
   const handleWon = () => {
-    setCookie("count", cookies.count + "w");
-    console.log(cookies.count.split("s")[0]);
+    const now = new Date();
+    const tenYears = new Date(now.getFullYear() + 10, now.getMonth(), now.getDate());
+    setCookie("count", cookies.count + "w", {expires: tenYears});
   }
   const handleLost = () => {
-    setCookie("count", cookies.count + "l");
+    const now = new Date();
+    const tenYears = new Date(now.getFullYear() + 10, now.getMonth(), now.getDate());
+    setCookie("count", cookies.count + "l", {expires: tenYears});
   }
   const handleSplit = () => {
-    setCookie("count", cookies.count + "s");
+    const now = new Date();
+    const tenYears = new Date(now.getFullYear() + 10, now.getMonth(), now.getDate());
+    setCookie("count", cookies.count + "s", {expires: tenYears});
   }
   const handleUndo = () => {
-    setCookie("count", cookies.count.slice(0, -1));
+    const now = new Date();
+    const tenYears = new Date(now.getFullYear() + 10, now.getMonth(), now.getDate());
+    setCookie("count", cookies.count.slice(0, -1), {expires: tenYears});
   }
   return (
     <>
